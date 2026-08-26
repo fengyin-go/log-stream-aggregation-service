@@ -1,0 +1,14 @@
+package service_test
+
+import (
+    "testing"
+    "log-aggregation/internal/service"
+    "log-aggregation/internal/store"
+)
+
+func TestR019Target(t *testing.T) {
+    coordinator := service.NewErrorRateSnapshotCoordinator(store.NewErrorRateSnapshotStore(1))
+    if coordinator.CountDuringUpdate() != 1 {
+        t.Fatalf("错误率计数快照没有满足题面描述的触发顺序和公开预期")
+    }
+}
