@@ -21,6 +21,22 @@ var validLogLevels = map[string]bool{
 	LogLevelFatal: true,
 }
 
+// ValidLogLevels 返回已登记的合法日志级别集合的副本，供可选级别规则登记使用。
+func ValidLogLevels() map[string]bool {
+	out := make(map[string]bool, len(validLogLevels))
+	for level, ok := range validLogLevels {
+		if ok {
+			out[level] = true
+		}
+	}
+	return out
+}
+
+// IsValidLogLevel 判断给定级别是否已登记为合法日志级别。
+func IsValidLogLevel(level string) bool {
+	return validLogLevels[level]
+}
+
 type LogEntry struct {
 	ID        string    `json:"id"`
 	SourceID  string    `json:"source_id"`
